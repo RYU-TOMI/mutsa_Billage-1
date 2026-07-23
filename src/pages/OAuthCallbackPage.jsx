@@ -22,10 +22,15 @@ function OAuthCallbackPage() {
       return;
     }
 
-    if (accessToken) {
-      // ✨ store의 login 함수 실행! (로컬 스토리지 저장 + 전역 상태 업데이트 동시 진행)
-      login(accessToken);
-      
+    if (!accessToken) {
+      alert('로그인 토큰을 전달받지 못했습니다.');
+
+      navigate('/login', { replace: true });
+
+      return;
+
+    }
+    login(accessToken);
       if (refreshToken) {
         localStorage.setItem('refreshToken', refreshToken);
       }
@@ -35,7 +40,7 @@ function OAuthCallbackPage() {
       } else {
         navigate('/', { replace: true });
       }
-    }
+    
   }, [navigate, searchParams, login]);
 
   return (
