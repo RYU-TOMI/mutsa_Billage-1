@@ -16,10 +16,10 @@ import RentalConfirmPage from "./pages/RentalConfirmPage";
 import RentalCompletePage from "./pages/RentalCompletePage";
 import OAuthCallbackPage from "./pages/OAuthCallbackPage";
 
-// ✨ 신청 목록 페이지만 먼저 임포트
 import MyApplicationsPage from "./pages/MyApplicationsPage";
+// ✨ 크레딧 충전 페이지 임포트
+import CreditChargePage from "./pages/CreditChargePage";
 
-// ✨ store 가져오기
 import useAuthStore from "./store/useAuthStore";
 
 function App() {
@@ -40,9 +40,10 @@ function App() {
         {/* 기존 페이지들 */}
         <Route path="/main" element={isLoggedIn ? <MainPage /> : <Navigate to="/login" replace />} />
         <Route path="/mypage" element={isLoggedIn ? <MyPage /> : <Navigate to="/login" replace />} />
-        
-        {/* ✨ 신청 목록 페이지 라우트만 우선 추가 */}
         <Route path="/mypage/applications" element={isLoggedIn ? <MyApplicationsPage /> : <Navigate to="/login" replace />} />
+        
+        {/* ✨ 크레딧 충전 페이지 라우트 추가 */}
+        <Route path="/mypage/charge" element={isLoggedIn ? <CreditChargePage /> : <Navigate to="/login" replace />} />
 
         <Route path="/group-buy" element={isLoggedIn ? <GroupBuyPage /> : <Navigate to="/login" replace />} />
         <Route path="/category" element={isLoggedIn ? <CategoryPage /> : <Navigate to="/login" replace />} />
