@@ -8,10 +8,12 @@ import MainPage from "./pages/MainPage";
 import MyPage from "./pages/MyPage";
 import RentalPage from "./pages/RentalPage";
 import SchoolSelectPage from "./pages/SchoolSelectPage";
+// 새로 만든 콜백 페이지 import
+import OAuthCallbackPage from "./pages/OAuthCallbackPage";
 
 function App() {
-  // 임시 토큰 값 (true로 바꾸면 로그인된 상태, false로 바꾸면 로그인 안 된 상태를 테스트할 수 있습니다)
-  const accessToken = false; // 로그인된 상태
+  // 임시 토큰 값 (추후 로컬 스토리지에서 가져오는 로직으로 변경 필요)
+  const accessToken = true; // 로그인된 상태
 
   return (
     <BrowserRouter>
@@ -20,6 +22,9 @@ function App() {
       <Routes>
         <Route path="/" element={accessToken ? <MainPage /> : <Navigate to="/login" replace />} />
         <Route path="/login" element={accessToken ? <Navigate to="/" replace /> : <LoginPage />} />
+        
+        {/* 백엔드에서 돌아오는 카카오 로그인 콜백 주소 연결 */}
+        <Route path="/oauth/callback" element={<OAuthCallbackPage />} />
         
         {/* 학교 선택 페이지 */}
         <Route path="/school" element={<SchoolSelectPage />} />
