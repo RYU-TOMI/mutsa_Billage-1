@@ -8,8 +8,16 @@ import MainPage from "./pages/MainPage";
 import MyPage from "./pages/MyPage";
 import RentalPage from "./pages/RentalPage";
 import SchoolSelectPage from "./pages/SchoolSelectPage";
+
+import CategoryPage from "./pages/CategoryPage";
+import ItemPage from "./pages/ItemPage";
+import RentalApplyPage from "./pages/RentalApplyPage";
+import RentalConfirmPage from "./pages/RentalConfirmPage";
+import RentalCompletePage from "./pages/RentalCompletePage";
+
 // 새로 만든 콜백 페이지 import
 import OAuthCallbackPage from "./pages/OAuthCallbackPage";
+
 
 function App() {
   // 임시 토큰 값 (추후 로컬 스토리지에서 가져오는 로직으로 변경 필요)
@@ -17,7 +25,6 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Navbar />
 
       <Routes>
         <Route path="/" element={accessToken ? <MainPage /> : <Navigate to="/login" replace />} />
@@ -33,11 +40,22 @@ function App() {
         <Route path="/main" element={accessToken ? <MainPage /> : <Navigate to="/login" replace />} />
         <Route path="/mypage" element={accessToken ? <MyPage /> : <Navigate to="/login" replace />} />
         <Route path="/group-buy" element={accessToken ? <GroupBuyPage /> : <Navigate to="/login" replace />} />
+
+        <Route path="/category" element={accessToken ? <CategoryPage /> : <Navigate to="/login" replace />} />
+        <Route path="/create" element={accessToken ? <CreatePostPage /> : <Navigate to="/login" replace />} />
+
+
+        <Route path="/item/:type/:id" element={<ItemPage />} />
+        <Route path="/item/:type/:id/apply" element={<RentalApplyPage />}/>
+        <Route path="/item/:type/:id/confirm" element={<RentalConfirmPage />}/>
+        <Route path="/item/rental/:id/complete" element={<RentalCompletePage />}/>
+
         <Route path="/rental" element={accessToken ? <RentalPage /> : <Navigate to="/login" replace />} />
         
         {/* 글 등록 관련 페이지 */}
         <Route path="/create" element={accessToken ? <CreatePostPage /> : <Navigate to="/login" replace />} />
         <Route path="/create/rental" element={accessToken ? <RentalPage /> : <Navigate to="/login" replace />} />
+
       </Routes>
     </BrowserRouter>
   );
