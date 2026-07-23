@@ -11,9 +11,7 @@ import SchoolSelectPage from "./pages/SchoolSelectPage";
 
 function App() {
   // 임시 토큰 값 (true로 바꾸면 로그인된 상태, false로 바꾸면 로그인 안 된 상태를 테스트할 수 있습니다)
-
-  const accessToken = true; // 로그인된 상태
-
+  const accessToken = false; // 로그인된 상태
 
   return (
     <BrowserRouter>
@@ -31,8 +29,10 @@ function App() {
         <Route path="/mypage" element={accessToken ? <MyPage /> : <Navigate to="/login" replace />} />
         <Route path="/group-buy" element={accessToken ? <GroupBuyPage /> : <Navigate to="/login" replace />} />
         <Route path="/rental" element={accessToken ? <RentalPage /> : <Navigate to="/login" replace />} />
+        
+        {/* 글 등록 관련 페이지 */}
         <Route path="/create" element={accessToken ? <CreatePostPage /> : <Navigate to="/login" replace />} />
-          
+        <Route path="/create/rental" element={accessToken ? <RentalPage /> : <Navigate to="/login" replace />} />
       </Routes>
     </BrowserRouter>
   );
